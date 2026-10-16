@@ -49,6 +49,7 @@
   .section p { margin: 0; color: var(--muted); }
   a.section:hover { border-color: var(--accent); }
   a.section:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .section p.desc { margin-top: .5rem; font-style: italic; }
   .section.empty { opacity: .6; }
 </style>
 </head>
@@ -61,16 +62,19 @@
     <a class="section" href="api-tester.html">
       <h2>API-tester</h2>
       <p>22 API-tester för bostäder, bostadssökande och behörigheter.</p>
+      <p class="desc">API-tester som använder Verify-ramverket och kollar att vi får förväntade svar från endpoints</p>
     </a>
 
     <a class="section" href="bostoc-plus-tester.html">
       <h2>Bostoc Plus-tester</h2>
       <p>2 testfall: registrera bostad och sök bostad.</p>
+      <p class="desc">Under arbete, end-to-end tester i gränssnittet för Bostoc Plus. Använder Playwright.</p>
     </a>
 
     <a class="section" href="testfall_forMedla_lagenhet_FoT.html">
       <h2>Bostoc, FÄP och Webben-tester</h2>
       <p>29 testfall för förmedling, Micasa, typlägenheter och webben.</p>
+      <p class="desc">Våra just nu mest heltäckande tester, som via Selenium testar hela flöden som HL, FÄ och bostadssökande.</p>
     </a>
   </div>
 </main>
