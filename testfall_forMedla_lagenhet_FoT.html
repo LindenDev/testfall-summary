@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automatiserade testfall för Bostoc, FÄP och Webben</title>
+<style>
+  :root {
+    --bg: #f2f2f2;
+    --surface: #ffffff;
+    --text: #111111;
+    --muted: #595959;
+    --line: #d0d0d0;
+    --accent: #000000;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121212;
+      --surface: #1c1c1c;
+      --text: #f0f0f0;
+      --muted: #a3a3a3;
+      --line: #3a3a3a;
+      --accent: #ffffff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+  }
+  .testcase {
+    max-width: 720px;
+    margin: 0 auto 1rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .testcase > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+  .testcase > summary::-webkit-details-marker { display: none; }
+  .testcase > summary::before,
+  .step > summary::before {
+    content: "";
+    flex: none;
+    width: .5rem;
+    height: .5rem;
+    border-right: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    transform: rotate(-45deg);
+    transition: transform .15s;
+  }
+  details[open] > summary::before { transform: rotate(45deg); }
+  summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .steps { border-top: 1px solid var(--line); }
+  .step { border-bottom: 1px solid var(--line); }
+  .step:last-child { border-bottom: 0; }
+  .step > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: .75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+  .step > summary::-webkit-details-marker { display: none; }
+  .num { font-weight: 600; color: var(--accent); min-width: 1.75rem; }
+  .step .body {
+    padding: 0 1.25rem 1rem 3.75rem;
+    color: var(--muted);
+  }
+  .body strong { color: var(--text); }
+  @media (max-width: 480px) { .step .body { padding-left: 1.25rem; } }
+  .tcid { color: var(--accent); white-space: nowrap; }
+  .divider { max-width: 720px; margin: 1.5rem auto; border: 0; border-top: 2px solid var(--line); }
+  .pagetitle { max-width: 720px; margin: 0 auto 1.5rem; font-size: 1.75rem; line-height: 1.25; }
+  .toolbar { padding: .5rem 1.25rem; border-bottom: 1px solid var(--line); }
+  .expand-all {
+    font: inherit;
+    font-size: .875rem;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: .25rem .75rem;
+    cursor: pointer;
+  }
+  .expand-all:hover { background: var(--bg); }
+  .expand-all:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .back {
+    display: block;
+    max-width: 720px;
+    margin: 0 auto 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: .9375rem;
+  }
+  .back:hover { text-decoration: underline; }
+  .back:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">← Tillbaka</a>
+
+<h1 class="pagetitle">Automatiserade testfall för Bostoc, FÄP och Webben</h1>
+
+<details class="testcase">
+  <summary><span class="tcid"># 1</span> Registrera köärende och lägga till medboende i Bostoc</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Öppna köärendefliken</summary>
+      <div class="body">Gå till Bostoc och navigera till köärendefliken.<br><strong>Förväntat:</strong> Köärendefliken visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Kontrollera om kunden finns</summary>
+      <div class="body">Sök efter kunden i Bostoc.<br><strong>Förväntat:</strong> Det framgår om kunden finns eller inte.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Registrera köärende</summary>
+      <div class="body">Välj att registrera ärende med personnummer, fyll i personuppgifter och spara.<br><strong>Förväntat:</strong> Köärendet sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Lägg till medboende</summary>
+      <div class="body">Lägg till ny medboende i köärendet och fyll i medboendeuppgifter.<br><strong>Förväntat:</strong> Medboendeformuläret kan fyllas i.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Spara medboende</summary>
+      <div class="body"><strong>Förväntat:</strong> Medboende finns registrerat på köärendet.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 2</span> Vanlig förmedling – hela flödet</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Skapa lägenhet</summary>
+      <div class="body">Skapa en lägenhet av typen Hyresrätt i Bostoc.<br><strong>Förväntat:</strong> Lägenheten skapas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera lägenheten</summary>
+      <div class="body">Ändra status till Registrerad och spara diarienumret.<br><strong>Förväntat:</strong> Status är Registrerad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Komplettera lägenheten</summary>
+      <div class="body">Ladda upp planritning och ange lägsta årsinkomstkrav.<br><strong>Förväntat:</strong> Planritning och inkomstkrav sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Annonsera ut</summary>
+      <div class="body">Annonsera ut lägenheten med kötyp Bostadskön.<br><strong>Förväntat:</strong> Lägenheten är annonserad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Skapa visningsomgång</summary>
+      <div class="body"><strong>Förväntat:</strong> Visningsomgång skapas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Registrera köärende</summary>
+      <div class="body">Kontrollera om kunden finns, registrera ärende med personnummer, fyll i personuppgifter och spara.<br><strong>Förväntat:</strong> Köärendet sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Intresseanmäl personen</summary>
+      <div class="body">Intresseanmäl personen på lägenheten och ladda upp intyg på köärendet.<br><strong>Förväntat:</strong> Intresseanmälan registreras och intyg är uppladdat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Avbryt annonseringen</summary>
+      <div class="body">Gå till Lägenhets-fliken, sedan Förbereda-fliken, och avbryt annonseringen.<br><strong>Förväntat:</strong> Lägenheten har status Efter annons.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Kör Hangfire-jobb</summary>
+      <div class="body">Öppna Hangfire i ny flik och trigga jobbet UppdateraAnnonseringsperiodstatus.<br><strong>Förväntat:</strong> Jobbet körs.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Ändra visningsdatum och lämna ja-svar</summary>
+      <div class="body">Ändra visningsdatum till ett passerat datum i Förbereda-fliken. Lämna ja-svar via köärendets lägenhets-flik.<br><strong>Förväntat:</strong> Ja-svar registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Ändra svarstid</summary>
+      <div class="body">Ändra svarstiden till ett passerat datum i Förbereda-fliken.<br><strong>Förväntat:</strong> Svarstiden har passerat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">12</span> Lyft spekulanten till hyresgästförslag</summary>
+      <div class="body"><strong>Förväntat:</strong> Lägenheten har status Föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">13</span> Skicka förslag till Fastighetsägarportalen</summary>
+      <div class="body"><strong>Förväntat:</strong> Hyresgästförslaget skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">14</span> Teckna avtal i FÄP</summary>
+      <div class="body">Öppna FÄP i ny flik, logga in, välj TEST Lani Fastigheter11, gå till Aktuella lägenheter, teckna avtal och stäng fliken.<br><strong>Förväntat:</strong> Avtal tecknas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">15</span> Kontrollera slutstatus</summary>
+      <div class="body">Sök upp lägenheten via lägenhetsnummer i Bostoc.<br><strong>Förväntat:</strong> Lägenheten har status Förmedlad.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 3</span> Vanlig förmedling – visning på ritning</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Skapa lägenhet</summary>
+      <div class="body">Skapa en lägenhet av typen Hyresrätt i Bostoc.<br><strong>Förväntat:</strong> Lägenheten skapas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera lägenheten</summary>
+      <div class="body">Ändra status till Registrerad och spara diarienumret.<br><strong>Förväntat:</strong> Status är Registrerad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Komplettera lägenheten</summary>
+      <div class="body">Ladda upp planritning och ange lägsta årsinkomstkrav.<br><strong>Förväntat:</strong> Planritning och inkomstkrav sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Annonsera ut</summary>
+      <div class="body">Annonsera ut lägenheten med kötyp Bostadskön.<br><strong>Förväntat:</strong> Lägenheten är annonserad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Skapa visning på ritning</summary>
+      <div class="body"><strong>Förväntat:</strong> Visning på ritning skapas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Registrera köärende</summary>
+      <div class="body">Kontrollera om kunden finns, registrera ärende med personnummer, fyll i personuppgifter och spara.<br><strong>Förväntat:</strong> Köärendet sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Intresseanmäl personen</summary>
+      <div class="body">Intresseanmäl personen på lägenheten och ladda upp intyg på köärendet.<br><strong>Förväntat:</strong> Intresseanmälan registreras och intyg är uppladdat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Avbryt annonseringen</summary>
+      <div class="body">Gå till Lägenhets-fliken, sedan Förbereda-fliken, och avbryt annonseringen.<br><strong>Förväntat:</strong> Lägenheten har status Efter annons.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Kör Hangfire-jobb</summary>
+      <div class="body">Öppna Hangfire i ny flik och trigga jobbet UppdateraAnnonseringsperiodstatus.<br><strong>Förväntat:</strong> Jobbet körs.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Lämna ja-svar</summary>
+      <div class="body">Lämna ja-svar via köärendets lägenhets-flik.<br><strong>Förväntat:</strong> Ja-svar registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Ändra svarstid</summary>
+      <div class="body">Ändra svarstiden till ett passerat datum i Förbereda-fliken.<br><strong>Förväntat:</strong> Svarstiden har passerat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">12</span> Lyft spekulanten till hyresgästförslag</summary>
+      <div class="body"><strong>Förväntat:</strong> Lägenheten har status Föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">13</span> Skicka förslag till Fastighetsägarportalen</summary>
+      <div class="body"><strong>Förväntat:</strong> Hyresgästförslaget skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">14</span> Teckna avtal i FÄP</summary>
+      <div class="body">Öppna FÄP i ny flik, logga in, välj TEST Lani Fastigheter11, gå till Aktuella lägenheter, teckna avtal och stäng fliken.<br><strong>Förväntat:</strong> Avtal tecknas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">15</span> Kontrollera slutstatus</summary>
+      <div class="body">Sök upp lägenheten via lägenhetsnummer i Bostoc.<br><strong>Förväntat:</strong> Lägenheten har status Förmedlad.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 4</span> Vanlig förmedling – sekretesskund</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Logga in i FÄP</summary>
+      <div class="body">Öppna Bostoc, öppna sedan FÄP i ny flik, logga in och välj TEST Lani Fastigheter11.<br><strong>Förväntat:</strong> Inloggning lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera lägenhet</summary>
+      <div class="body">Succession, Solna/Hagalund, Kyrkbacken 29, hyresrätt, 2 rum, 73 m², 6800 kr/mån, 2 tr, kök, badrum, hiss, balkong. Stäng fliken.<br><strong>Förväntat:</strong> Lägenheten sparas i FÄP.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Hitta lägenheten i Bostoc</summary>
+      <div class="body">Gå till Lägenhets-fliken, sök upp lägenheten via lägenhetsnummer och öppna Uppgifter Registrera.<br><strong>Förväntat:</strong> Lägenheten hittas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Registrera lägenheten</summary>
+      <div class="body">Ändra status till Registrerad och spara diarienumret.<br><strong>Förväntat:</strong> Status är Registrerad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Komplettera lägenheten</summary>
+      <div class="body">Ladda upp planritning och ange lägsta årsinkomstkrav.<br><strong>Förväntat:</strong> Planritning och inkomstkrav sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Ange antal spekulanter</summary>
+      <div class="body">Uppdatera visningsomgång med önskat antal spekulanter på visning: 5.<br><strong>Förväntat:</strong> Antalet sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Annonsera och skapa visning</summary>
+      <div class="body">Annonsera ut med kötyp Bostadskön och skapa visningsomgång.<br><strong>Förväntat:</strong> Lägenheten är annonserad och visningsomgång skapad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Intresseanmäl sekretesskunden</summary>
+      <div class="body">Gå till köärendet för sekretesskunden via personnummer, intresseanmäl på lägenheten och ladda upp intyg.<br><strong>Förväntat:</strong> Intresseanmälan registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Avbryt annonseringen</summary>
+      <div class="body">Gå till Lägenhets-fliken, sedan Förbereda-fliken, och avbryt annonseringen.<br><strong>Förväntat:</strong> Lägenheten har status Efter annons.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Kör Hangfire-jobb</summary>
+      <div class="body">Öppna Hangfire i ny flik och trigga jobbet UppdateraAnnonseringsperiodstatus.<br><strong>Förväntat:</strong> Jobbet körs.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Ändra visningsdatum och lämna ja-svar</summary>
+      <div class="body">Ändra visningsdatum till ett passerat datum i Förbereda-fliken. Lämna ja-svar via köärendets lägenhets-flik.<br><strong>Förväntat:</strong> Ja-svar registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">12</span> Ändra svarstid</summary>
+      <div class="body">Ändra svarstiden till ett passerat datum i Förbereda-fliken.<br><strong>Förväntat:</strong> Svarstiden har passerat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">13</span> Lyft spekulanten till hyresgästförslag</summary>
+      <div class="body"><strong>Förväntat:</strong> Lägenheten har status Föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">14</span> Skicka förslag till Fastighetsägarportalen</summary>
+      <div class="body"><strong>Förväntat:</strong> Hyresgästförslaget skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">15</span> Kontrollera sekretess i FÄP</summary>
+      <div class="body">Öppna FÄP i ny flik, logga in, välj fastighetsägare och gå till Aktuella lägenheter.<br><strong>Förväntat:</strong> Sekretess visas i FÄP.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">16</span> Teckna avtal</summary>
+      <div class="body">Teckna avtal som fastighetsägare och stäng fliken.<br><strong>Förväntat:</strong> Avtal tecknas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">17</span> Kontrollera slutstatus</summary>
+      <div class="body">Sök upp lägenheten via lägenhetsnummer i Bostoc.<br><strong>Förväntat:</strong> Lägenheten har status Förmedlad.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 5</span> Förmedla lägenhet via internkön</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Logga in i FÄP</summary>
+      <div class="body">Logga in och välj TEST Lani Fastigheter11 som fastighetsägare.<br><strong>Förväntat:</strong> Inloggning lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera lägenhet</summary>
+      <div class="body">Succession, Stockholm/Farsta, Lysviksgatan 95, hyresrätt, 12 rum, 40 m², 5555 kr/mån, 5 tr, kök, badrum, hiss, balkong.<br><strong>Förväntat:</strong> Lägenheten sparas i FÄP.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Hitta lägenheten i Bostoc</summary>
+      <div class="body">Gå till Bostoc, sök upp lägenheten via lägenhetsnummer och spara diarienumret.<br><strong>Förväntat:</strong> Lägenheten hittas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Registrera för internkö</summary>
+      <div class="body">I Uppgifter Registrera: ändra status till Registrerad och välj avsedd för kö Internkön, sedan Kommunala bolagens internkö.<br><strong>Förväntat:</strong> Status Registrerad och rätt kö är vald.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Annonsera i internkön</summary>
+      <div class="body">I Förbereda-fliken: ange önskat antal spekulanter på visning: 5, annonsera med kötyp Kommunala bolagens internkö och skapa visningsomgång.<br><strong>Förväntat:</strong> Lägenheten är annonserad i internkön.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Aktivera internkö på köärende</summary>
+      <div class="body">Gå till köärendet för personnummer 198906190049, öppna Registrera och aktivera internkö (avtalsnummer 3096599, bostadsbolag AB Familjebostäder). Spara.<br><strong>Förväntat:</strong> Internkön är aktiverad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Intresseanmäl kund</summary>
+      <div class="body">Intresseanmäl kunden som aktiverat kötiden för internkön på lägenheten och ladda upp intyg.<br><strong>Förväntat:</strong> Intresseanmälan registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Avbryt annonseringen</summary>
+      <div class="body">Gå till Lägenhets-fliken, sedan Förbereda-fliken, och avbryt annonseringen.<br><strong>Förväntat:</strong> Lägenheten har status Efter annons.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Kör Hangfire-jobb</summary>
+      <div class="body">Öppna Hangfire i ny flik och trigga jobbet UppdateraAnnonseringsperiodstatus.<br><strong>Förväntat:</strong> Jobbet körs.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Ändra visningsdatum och lämna ja-svar</summary>
+      <div class="body">Ändra visningsdatum till ett passerat datum. Lämna ja-svar via köärendets lägenhets-flik.<br><strong>Förväntat:</strong> Ja-svar registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Ändra svarstid</summary>
+      <div class="body">Ändra svarstiden till ett passerat datum i Förbereda-fliken.<br><strong>Förväntat:</strong> Svarstiden har passerat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">12</span> Lyft spekulanten till hyresgästförslag</summary>
+      <div class="body"><strong>Förväntat:</strong> Lägenheten har status Föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">13</span> Skicka förslag till Fastighetsägarportalen</summary>
+      <div class="body"><strong>Förväntat:</strong> Hyresgästförslaget skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">14</span> Teckna avtal i FÄP</summary>
+      <div class="body">Öppna FÄP i ny flik, logga in, välj fastighetsägare, gå till Aktuella lägenheter, teckna avtal och stäng fliken.<br><strong>Förväntat:</strong> Avtal tecknas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">15</span> Kontrollera slutstatus</summary>
+      <div class="body">Sök upp lägenheten via lägenhetsnummer i Bostoc.<br><strong>Förväntat:</strong> Lägenheten har status Förmedlad.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 6</span> Vanlig förmedling – ingen visning – hela flödet</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Skapa lägenhet</summary>
+      <div class="body">Skapa en lägenhet av typen Hyresrätt i Bostoc.<br><strong>Förväntat:</strong> Lägenheten skapas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera lägenheten</summary>
+      <div class="body">Ändra status till Registrerad och spara diarienumret.<br><strong>Förväntat:</strong> Status är Registrerad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Komplettera lägenheten</summary>
+      <div class="body">Ladda upp planritning och ange lägsta årsinkomstkrav.<br><strong>Förväntat:</strong> Planritning och inkomstkrav sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Välj ingen visning</summary>
+      <div class="body">I Förbereda-fliken: kryssa i checkboxen Ingen visning.<br><strong>Förväntat:</strong> Ingen visning är vald.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Annonsera ut</summary>
+      <div class="body">Annonsera ut lägenheten med kötyp Bostadskön.<br><strong>Förväntat:</strong> Lägenheten är annonserad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Registrera köärende med medboende</summary>
+      <div class="body">Kontrollera om kunden finns, registrera ärende med personnummer, fyll i personuppgifter och spara. Lägg till medboende, fyll i uppgifter och spara.<br><strong>Förväntat:</strong> Köärende och medboende sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Intresseanmäl personen</summary>
+      <div class="body">Intresseanmäl personen på lägenheten och ladda upp intyg på köärendet.<br><strong>Förväntat:</strong> Intresseanmälan registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Avbryt annonseringen</summary>
+      <div class="body">Gå till Lägenhets-fliken, sedan Förbereda-fliken, och avbryt annonseringen.<br><strong>Förväntat:</strong> Lägenheten har status Efter annons.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Lyft spekulanten till hyresgästförslag</summary>
+      <div class="body">Gå till Lägenhets-fliken och lyft spekulanten (ingen visning eller ja-svar behövs).<br><strong>Förväntat:</strong> Lägenheten har status Föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Skicka förslag till Fastighetsägarportalen</summary>
+      <div class="body"><strong>Förväntat:</strong> Hyresgästförslaget skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Teckna avtal i FÄP</summary>
+      <div class="body">Öppna FÄP i ny flik, logga in, välj TEST Lani Fastigheter11, gå till Aktuella lägenheter, teckna avtal och stäng fliken.<br><strong>Förväntat:</strong> Avtal tecknas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">12</span> Kontrollera slutstatus</summary>
+      <div class="body">Sök upp lägenheten via lägenhetsnummer i Bostoc.<br><strong>Förväntat:</strong> Lägenheten har status Förmedlad.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 7</span> Vanlig förmedling av lägenhet för student (ofullständigt)</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Logga in i FÄP</summary>
+      <div class="body">Öppna Bostoc, öppna sedan FÄP i ny flik, logga in och välj TEST Lani Fastigheter11.<br><strong>Förväntat:</strong> Inloggning lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera lägenhet</summary>
+      <div class="body">Nyproduktion, Solna/Hagalund, Kyrkbacken 21, hyresrätt, 2 rum, 73 m², 6800 kr/mån, 2 tr, kök, badrum, hiss, balkong. Stäng fliken.<br><strong>Förväntat:</strong> Lägenheten sparas i FÄP.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Öppna lägenheten i Bostoc</summary>
+      <div class="body">Gå till Lägenhets-fliken, sök upp lägenheten och öppna Uppgifter Registrera.<br><strong>Förväntat:</strong> Lägenheten öppnas. Scenariot slutar här i featurefilen.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 8</span> Förmedla lägenhet till FoT</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Logga in i FÄP</summary>
+      <div class="body">Logga in i FÄP som fastighetsägare TEST Lani Fastigheter11.<br><strong>Förväntat:</strong> Inloggning lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera ny lägenhet</summary>
+      <div class="body">Nyproduktion, Stockholm/Farsta, Lysviksgatan 95, hyresrätt, 1 rum, 30 m², 3333 kr/mån, 3 tr, kök, badrum, hiss, balkong.<br><strong>Förväntat:</strong> Lägenheten sparas i FÄP.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Hitta lägenheten i Bostoc</summary>
+      <div class="body">Öppna Bostoc, sök upp lägenheten via lägenhetsnummer och spara diarienumret.<br><strong>Förväntat:</strong> Lägenheten hittas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Ändra status till Registrerad</summary>
+      <div class="body">Sätt status till Registrerad och välj kö Bostadskön.<br><strong>Förväntat:</strong> Status och kö uppdateras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Förbered förmedling till FoT</summary>
+      <div class="body">I fliken Förbereda: ändra förmedlingstyp till FoT, sätt FoT-förfrågan till förfrågan och skapa visning på ritning.<br><strong>Förväntat:</strong> Förmedlingstyp FoT är satt och visning är skapad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Skapa ny framställan</summary>
+      <div class="body">I FoT-fliken: välj institution och skapa ny framställan (status Under arbete, typ Träning, område Hela Stockholm).<br><strong>Förväntat:</strong> Framställan skapas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Koppla ärendet till lägenheten</summary>
+      <div class="body"><strong>Förväntat:</strong> Lägenheten är kopplad till ärendet.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Kalla till visning och skicka förslag</summary>
+      <div class="body">Kalla till visning, svara ja och skicka förslag.<br><strong>Förväntat:</strong> Förslag skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Kontrollera diariefliken</summary>
+      <div class="body"><strong>Förväntat:</strong> Diariet innehåller posten &quot;Ny visningsomgång&quot;.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Öppna Aktuella lägenheter i FÄP</summary>
+      <div class="body">Öppna FÄP i ny flik, logga in, välj fastighetsägaren och gå till Aktuella lägenheter.<br><strong>Förväntat:</strong> Lägenheten visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Verifiera status i FÄP</summary>
+      <div class="body">Kontrollera lägenhetens status och stäng sedan fliken.<br><strong>Förväntat:</strong> Status är Föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">12</span> Ändra till Avtal tecknat</summary>
+      <div class="body">I Bostoc: ändra till Avtal tecknat.<br><strong>Förväntat:</strong> Status ändras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">13</span> Kontrollera slutstatus</summary>
+      <div class="body"><strong>Förväntat:</strong> Lägenheten har status Förmedlad.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 9</span> Evakuering – hela flödet</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Sök upp fastighetsägare</summary>
+      <div class="body">Öppna Bostoc och sök upp en fastighetsägare.<br><strong>Förväntat:</strong> Fastighetsägaren hittas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Skapa och registrera lägenhet</summary>
+      <div class="body">Skapa en lägenhet av typen Hyresrätt i Bostoc och ändra status till Registrerad.<br><strong>Förväntat:</strong> Status är Registrerad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Välj förmedlingstyp Evakuering</summary>
+      <div class="body">I Förbereda-fliken: ändra förmedlingstyp till Evakuering och skapa en visningsomgång.<br><strong>Förväntat:</strong> Förmedlingstyp Evakuering är satt och visningsomgång skapad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Skapa nytt uppdrag</summary>
+      <div class="body">Gå till Evakuerings-sidan och skapa ett nytt uppdrag.<br><strong>Förväntat:</strong> Uppdraget skapas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Registrera evakueringsärende</summary>
+      <div class="body">Registrera ett nytt evakueringsärende och fyll i personuppgifter.<br><strong>Förväntat:</strong> Ärendet registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Kontrollera hyresvärd</summary>
+      <div class="body"><strong>Förväntat:</strong> Hyresvärd är förifylld.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Ange område och status</summary>
+      <div class="body">Välj hela Stockholm och ändra status till Under arbete.<br><strong>Förväntat:</strong> Område och status sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Ange boendedatum</summary>
+      <div class="body">Ange boendedatum och spara.<br><strong>Förväntat:</strong> Boendedatum sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Lägg till hushållsmedlem och medboende</summary>
+      <div class="body">Lägg till ny hushållsmedlem och ny medboende, fyll i medboendeuppgifter och spara.<br><strong>Förväntat:</strong> Medboende finns registrerat på ärendet.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Koppla ärendet till lägenhet</summary>
+      <div class="body"><strong>Förväntat:</strong> Ärendet är kopplat till lägenheten.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Kalla till visning och skicka förslag</summary>
+      <div class="body">Kalla till visning, svara ja och skicka förslag.<br><strong>Förväntat:</strong> Förslag skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">12</span> Ändra till Avtal tecknat</summary>
+      <div class="body"><strong>Förväntat:</strong> Status ändras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">13</span> Kontrollera slutstatus</summary>
+      <div class="body"><strong>Förväntat:</strong> Lägenheten har status Förmedlad.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 10</span> Registrera en lägenhet i FÄP</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Logga in i FÄP</summary>
+      <div class="body">Logga in och välj TEST Lani Fastigheter11 som fastighetsägare.<br><strong>Förväntat:</strong> Inloggning lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera lägenhet</summary>
+      <div class="body">Nyproduktion, Stockholm/Farsta, Lysviksgatan 95, hyresrätt, 12 rum, 40 m², 5555 kr/mån, 5 tr, kök, badrum, hiss, balkong.<br><strong>Förväntat:</strong> Lägenheten sparas i FÄP.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 11</span> Lämna in en lägenhet via FÄP med visningsbokning</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Logga in i FÄP</summary>
+      <div class="body">Logga in och välj TEST Lani Fastigheter11 som fastighetsägare.<br><strong>Förväntat:</strong> Inloggning lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera lägenhet och boka visning</summary>
+      <div class="body">Succession, Stockholm/Farsta, Lysviksgatan 95, hyresrätt. Boka visning i FÄP.<br><strong>Förväntat:</strong> Lägenheten sparas och visning är bokad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Hitta lägenheten i Bostoc</summary>
+      <div class="body">Gå till Bostoc, öppna Lägenhets-fliken och sök upp lägenheten via lägenhetsnummer.<br><strong>Förväntat:</strong> Lägenheten hittas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Kontrollera visning</summary>
+      <div class="body">Öppna Förbereda-fliken och jämför visningens datum och tid med FÄP.<br><strong>Förväntat:</strong> Datum och tid matchar det som finns i FÄP.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 12</span> Förtur – hela flödet med fysisk visning</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Logga in i FÄP</summary>
+      <div class="body">Öppna Bostoc, öppna sedan FÄP i ny flik, logga in och välj TEST Lani Fastigheter11.<br><strong>Förväntat:</strong> Inloggning lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera lägenhet</summary>
+      <div class="body">Succession, Stockholm/Akalla, Sibeliusgången 20B, hyresrätt, 2 rum, 40 m², 5000 kr/mån, 3 tr, kök, badrum, hiss, balkong. Stäng fliken.<br><strong>Förväntat:</strong> Lägenheten sparas i FÄP.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Registrera lägenheten i Bostoc</summary>
+      <div class="body">Gå till Lägenhets-fliken, sök upp lägenheten, öppna Uppgifter Registrera, ändra status till Registrerad och ladda upp planritning.<br><strong>Förväntat:</strong> Status är Registrerad och planritning är uppladdad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Välj förmedlingstyp Förtur</summary>
+      <div class="body">I Förbereda-fliken: ändra förmedlingstyp till Förtur och skapa visningsomgång.<br><strong>Förväntat:</strong> Förmedlingstyp Förtur är satt och visningsomgång skapad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Registrera köärende</summary>
+      <div class="body">Gå till köärendefliken, kontrollera om kunden finns, registrera ärende med personnummer, fyll i personuppgifter och spara.<br><strong>Förväntat:</strong> Köärendet sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Registrera förtursärende</summary>
+      <div class="body">Registrera ett nytt förtursärende och ge bifall.<br><strong>Förväntat:</strong> Förtursärendet har bifall.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Koppla ärendet till lägenheten</summary>
+      <div class="body"><strong>Förväntat:</strong> Ärendet är kopplat till lägenheten.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Kalla till visning och skicka förslag</summary>
+      <div class="body">Gå till Lägenhets-fliken, öppna fliken Spekulanter, kalla till visning, svara ja och skicka förslag.<br><strong>Förväntat:</strong> Förslag skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Kontrollera diariet</summary>
+      <div class="body"><strong>Förväntat:</strong> Diariet innehåller posten &quot;Ny visningsomgång&quot;.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Verifiera status i FÄP</summary>
+      <div class="body">Öppna FÄP i ny flik, logga in, välj fastighetsägare, gå till Aktuella lägenheter och stäng fliken.<br><strong>Förväntat:</strong> Status är Föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Ändra till Avtal tecknat</summary>
+      <div class="body"><strong>Förväntat:</strong> Status ändras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">12</span> Kontrollera slutstatus</summary>
+      <div class="body">Kontrollera status och diariet.<br><strong>Förväntat:</strong> Lägenheten har status Förmedlad och diariet innehåller posten &quot;Förmedlad&quot;.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 13</span> Omannonsera förturslägenhet till vanlig förmedling</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Logga in i FÄP</summary>
+      <div class="body">Öppna Bostoc, öppna sedan FÄP i ny flik, logga in och välj TEST Lani Fastigheter11.<br><strong>Förväntat:</strong> Inloggning lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera lägenhet</summary>
+      <div class="body">Succession, Stockholm/Akalla, Sibeliusgången 20B, hyresrätt, 3 rum, 60 m², 7000 kr/mån, 2 tr, kök, badrum, hiss, balkong. Stäng fliken.<br><strong>Förväntat:</strong> Lägenheten sparas i FÄP.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Registrera lägenheten i Bostoc</summary>
+      <div class="body">Gå till Lägenhets-fliken, sök upp lägenheten, öppna Uppgifter Registrera, ändra status till Registrerad och ladda upp planritning.<br><strong>Förväntat:</strong> Status är Registrerad och planritning är uppladdad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Välj förmedlingstyp Förtur</summary>
+      <div class="body">I Förbereda-fliken: ändra förmedlingstyp till Förtur och skapa visningsomgång.<br><strong>Förväntat:</strong> Förmedlingstyp Förtur är satt och visningsomgång skapad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Registrera köärende och förtursärende</summary>
+      <div class="body">Registrera köärende med personnummer och spara. Registrera ett nytt förtursärende, ge bifall och koppla ärendet till lägenheten.<br><strong>Förväntat:</strong> Förtursärendet har bifall och är kopplat till lägenheten.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Kalla till visning och svara nej</summary>
+      <div class="body">Gå till Lägenhets-fliken, öppna fliken Spekulanter, kalla till visning och svara nej.<br><strong>Förväntat:</strong> Nej-svar registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Ställ in visning</summary>
+      <div class="body">I Förbereda-fliken: ändra svarstiden till ett passerat datum och ställ in visningen utan att skicka SMS till spekulanter.<br><strong>Förväntat:</strong> Visningen är inställd och inget SMS skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Byt till köförmedling</summary>
+      <div class="body">Ändra förmedlingstyp till Köförmedling och spara diarienumret.<br><strong>Förväntat:</strong> Förmedlingstyp Köförmedling är satt.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Annonsera ut</summary>
+      <div class="body">Ange önskat antal spekulanter på visning: 5, annonsera ut med kötyp Bostadskön och skapa visningsomgång.<br><strong>Förväntat:</strong> Lägenheten är annonserad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Registrera köärende</summary>
+      <div class="body">Kontrollera om kunden finns, registrera ärende med personnummer, fyll i personuppgifter och spara.<br><strong>Förväntat:</strong> Köärendet sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Intresseanmäl personen</summary>
+      <div class="body">Intresseanmäl personen på lägenheten och ladda upp intyg på köärendet.<br><strong>Förväntat:</strong> Intresseanmälan registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">12</span> Avbryt annonseringen</summary>
+      <div class="body">Gå till Lägenhets-fliken, sedan Förbereda-fliken, och avbryt annonseringen.<br><strong>Förväntat:</strong> Lägenheten har status Efter annons.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">13</span> Kör Hangfire-jobb</summary>
+      <div class="body">Öppna Hangfire i ny flik och trigga jobbet UppdateraAnnonseringsperiodstatus.<br><strong>Förväntat:</strong> Jobbet körs.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">14</span> Ändra visningsdatum och lämna ja-svar</summary>
+      <div class="body">Ändra visningsdatum till ett passerat datum. Lämna ja-svar via köärendets lägenhets-flik.<br><strong>Förväntat:</strong> Ja-svar registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">15</span> Ändra svarstid</summary>
+      <div class="body">Ändra svarstiden till ett passerat datum i Förbereda-fliken.<br><strong>Förväntat:</strong> Svarstiden har passerat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">16</span> Lyft spekulanten till hyresgästförslag</summary>
+      <div class="body"><strong>Förväntat:</strong> Lägenheten har status Föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">17</span> Skicka förslag till Fastighetsägarportalen</summary>
+      <div class="body"><strong>Förväntat:</strong> Hyresgästförslaget skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">18</span> Teckna avtal i FÄP</summary>
+      <div class="body">Öppna FÄP i ny flik, logga in, välj TEST Lani Fastigheter11, gå till Aktuella lägenheter, teckna avtal och stäng fliken.<br><strong>Förväntat:</strong> Avtal tecknas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">19</span> Kontrollera slutstatus</summary>
+      <div class="body">Sök upp lägenheten via lägenhetsnummer i Bostoc.<br><strong>Förväntat:</strong> Lägenheten har status Förmedlad.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 14</span> Micasa – sökfunktion</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Öppna Micasa-fliken</summary>
+      <div class="body"><strong>Förväntat:</strong> Micasa-fliken visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Verifiera Micasa-sökningen</summary>
+      <div class="body"><strong>Förväntat:</strong> Sökningen fungerar och ger korrekta resultat.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 15</span> Micasa – bifall</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Registrera köärende</summary>
+      <div class="body">Gå till köärendefliken, kontrollera om kunden finns, registrera ärende med personnummer, fyll i personuppgifter och spara.<br><strong>Förväntat:</strong> Köärendet sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera Micasa-ärende</summary>
+      <div class="body">Gå till Micasa-fliken och registrera ett Micasa-ärende.<br><strong>Förväntat:</strong> Micasa-ärendet registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Ge bifall</summary>
+      <div class="body"><strong>Förväntat:</strong> Ärendet har bifall.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 16</span> Micasa – avslag</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Registrera köärende</summary>
+      <div class="body">Gå till köärendefliken, kontrollera om kunden finns, registrera ärende med personnummer, fyll i personuppgifter och spara.<br><strong>Förväntat:</strong> Köärendet sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera Micasa-ärende</summary>
+      <div class="body">Gå till Micasa-fliken och registrera ett Micasa-ärende.<br><strong>Förväntat:</strong> Micasa-ärendet registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Ge avslag</summary>
+      <div class="body"><strong>Förväntat:</strong> Ärendet har avslag.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 17</span> Micasa – helt flöde</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Registrera köärende</summary>
+      <div class="body">Gå till köärendefliken, kontrollera om kunden finns, registrera ärende med personnummer, fyll i personuppgifter och spara.<br><strong>Förväntat:</strong> Köärendet sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera Micasa-ärende med bifall</summary>
+      <div class="body">Gå till Micasa-fliken, registrera ett Micasa-ärende och ge bifall.<br><strong>Förväntat:</strong> Ärendet har bifall.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Registrera Micasa-lägenhet</summary>
+      <div class="body">Registrera en Micasa-lägenhet i Bostoc, ändra status till Registrerad, spara diarienumret och ladda upp planritning.<br><strong>Förväntat:</strong> Status är Registrerad och planritning är uppladdad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Välj förmedlingstyp Micasa</summary>
+      <div class="body">I Förbereda-fliken: ändra förmedlingstyp till Micasa, skapa en spekulantlista och skapa en visningsomgång.<br><strong>Förväntat:</strong> Förmedlingstyp Micasa är satt, spekulantlista och visningsomgång är skapade.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Kör Hangfire-jobb</summary>
+      <div class="body">Öppna Hangfire i ny flik och trigga jobbet UppdateraAnnonseringsperiodstatus.<br><strong>Förväntat:</strong> Jobbet körs.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Kontrollera status</summary>
+      <div class="body">Gå till Förbereda-fliken.<br><strong>Förväntat:</strong> Lägenheten har status Inväntar visning.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Ändra visningsdatum</summary>
+      <div class="body">Ändra visningsdatum till ett passerat datum.<br><strong>Förväntat:</strong> Visningsdatumet har passerat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Svara på visning</summary>
+      <div class="body">Gå till Spekulanter-fliken, svara nej på spekulant 2 och ja på spekulant 1.<br><strong>Förväntat:</strong> Svaren registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Kontrollera ja-svar</summary>
+      <div class="body">Kontrollera ja-svaret i Spekulanter-fliken.<br><strong>Förväntat:</strong> Ja-svaret visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Ändra svarstid</summary>
+      <div class="body">Ändra svarstiden till ett passerat datum i Förbereda-fliken.<br><strong>Förväntat:</strong> Svarstiden har passerat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Lyft spekulanten till hyresgästförslag</summary>
+      <div class="body">Gå till Spekulanter-fliken och lyft spekulanten.<br><strong>Förväntat:</strong> Lägenheten har status Föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">12</span> Skicka förslag till Fastighetsägarportalen</summary>
+      <div class="body"><strong>Förväntat:</strong> Hyresgästförslaget skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">13</span> Teckna avtal i FÄP</summary>
+      <div class="body">Öppna FÄP i ny flik, logga in, välj Micasa Fastigheter i Stockholm, gå till Aktuella lägenheter, teckna avtal och stäng fliken.<br><strong>Förväntat:</strong> Avtal tecknas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">14</span> Kontrollera slutstatus</summary>
+      <div class="body">Sök upp lägenheten via lägenhetsnummer i Bostoc.<br><strong>Förväntat:</strong> Lägenheten har status Förmedlad.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 18</span> Micasa – visning på ritning</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Registrera köärende</summary>
+      <div class="body">Gå till köärendefliken, kontrollera om kunden finns, registrera ärende med personnummer, fyll i personuppgifter och spara.<br><strong>Förväntat:</strong> Köärendet sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera Micasa-ärende med bifall</summary>
+      <div class="body">Gå till Micasa-fliken, registrera ett Micasa-ärende och ge bifall.<br><strong>Förväntat:</strong> Ärendet har bifall.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Registrera Micasa-lägenhet</summary>
+      <div class="body">Registrera en Micasa-lägenhet i Bostoc, ändra status till Registrerad, spara diarienumret och ladda upp planritning.<br><strong>Förväntat:</strong> Status är Registrerad och planritning är uppladdad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Välj förmedlingstyp Micasa</summary>
+      <div class="body">I Förbereda-fliken: ändra förmedlingstyp till Micasa och skapa en spekulantlista.<br><strong>Förväntat:</strong> Lägenheten har status Efter annons.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Skapa visning på ritning</summary>
+      <div class="body"><strong>Förväntat:</strong> Lägenheten har status Pågående visning.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Svara ja</summary>
+      <div class="body">Gå till Spekulanter-fliken och svara ja på spekulant 1.<br><strong>Förväntat:</strong> Ja-svaret registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Kontrollera ja-svar</summary>
+      <div class="body">Kontrollera ja-svaret i Spekulanter-fliken.<br><strong>Förväntat:</strong> Ja-svaret visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Ändra svarstid och lyft spekulant</summary>
+      <div class="body">Ändra svarstiden till ett passerat datum i Förbereda-fliken och lyft spekulanten till hyresgästförslag.<br><strong>Förväntat:</strong> Lägenheten har status Föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Skicka förslag till Fastighetsägarportalen</summary>
+      <div class="body"><strong>Förväntat:</strong> Hyresgästförslaget skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Teckna avtal i FÄP</summary>
+      <div class="body">Öppna FÄP i ny flik, logga in, välj Micasa Fastigheter i Stockholm, gå till Aktuella lägenheter, teckna avtal och stäng fliken.<br><strong>Förväntat:</strong> Avtal tecknas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Kontrollera slutstatus</summary>
+      <div class="body">Sök upp lägenheten via lägenhetsnummer i Bostoc.<br><strong>Förväntat:</strong> Lägenheten har status Förmedlad.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 19</span> Typlägenhet – hela flödet med visning på ritning</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Registrera fastighetsägare och projekt</summary>
+      <div class="body">I Bostoc: gå till Fastighetsägare-fliken och registrera fastighetsägare. Gå till Projekt-fliken och registrera projektet &quot;Test Projekt&quot;.<br><strong>Förväntat:</strong> Fastighetsägare och projekt är registrerade.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Registrera typlägenhet</summary>
+      <div class="body">I FÄP som Testbo AB: registrera Nyproduktion, Solna/Hagalund, Kyrkbacken 27, hyresrätt, 3 rum, 67 m², 6700 kr/mån, 2 tr, kök, badrum, hiss, balkong. Stäng fliken.<br><strong>Förväntat:</strong> Lägenheten sparas i FÄP.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Markera som typlägenhet</summary>
+      <div class="body">I Bostoc: sök upp lägenheten, öppna Uppgifter Registrera, ändra status till Registrerad, spara diarienumret och bocka i att lägenheten är en typlägenhet.<br><strong>Förväntat:</strong> Lägenheten är markerad som typlägenhet.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Koppla typlägenheten till projekt</summary>
+      <div class="body"><strong>Förväntat:</strong> Typlägenheten är kopplad till projektet.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Registrera underlägenhet 0</summary>
+      <div class="body">I FÄP som Testbo AB: registrera Nyproduktion, Solna/Hagalund, Kyrkbacken 9, hyresrätt, 3 rum, 68 m², 6800 kr/mån, 1 tr, kök, badrum, hiss, balkong. I Bostoc: sök upp lägenheten, ändra status till Registrerad. Fyll i typlägenhetens diarienummer.<br><strong>Förväntat:</strong> Underlägenheten är registrerad och kopplad via typlägenhetens diarienummer.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Registrera underlägenhet 1</summary>
+      <div class="body">I FÄP som Testbo AB: registrera Nyproduktion, Solna/Hagalund, Kyrkbacken 9, hyresrätt, 3 rum, 67 m², 6700 kr/mån, 2 tr, kök, badrum, hiss, balkong. I Bostoc: sök upp lägenheten, ändra status till Registrerad. Ladda upp planritning. Fyll i typlägenhetens diarienummer.<br><strong>Förväntat:</strong> Underlägenheten är registrerad och kopplad via typlägenhetens diarienummer.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Registrera underlägenhet 2</summary>
+      <div class="body">I FÄP som Testbo AB: registrera Nyproduktion, Solna/Hagalund, Kyrkbacken 9, hyresrätt, 3 rum, 69 m², 6900 kr/mån, 3 tr, kök, badrum, hiss, balkong. I Bostoc: sök upp lägenheten, ändra status till Registrerad. Ladda upp planritning. Fyll i typlägenhetens diarienummer.<br><strong>Förväntat:</strong> Underlägenheten är registrerad och kopplad via typlägenhetens diarienummer.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Annonsera typlägenheten</summary>
+      <div class="body">Gå till typlägenheten, öppna Förbereda-fliken, ange önskat antal spekulanter på visning: 5, annonsera med kötyp Bostadskön och skapa visning på ritning.<br><strong>Förväntat:</strong> Typlägenheten är annonserad med visning på ritning.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Spara underlägenheter</summary>
+      <div class="body">Gå till lägenhetsfliken Lägenheter och spara alla underlägenheter i en lista.<br><strong>Förväntat:</strong> Underlägenheterna finns i listan.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">10</span> Intresseanmäl 9 personer</summary>
+      <div class="body">Gå till köärendefliken, registrera 9 nya personnummer och intresseanmäl dem på lägenheten.<br><strong>Förväntat:</strong> 9 intresseanmälningar är registrerade.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">11</span> Avbryt annonseringen</summary>
+      <div class="body">Gå till lägenheten via Lägenheter-fliken, öppna Förbereda-fliken och avbryt annonseringen.<br><strong>Förväntat:</strong> Lägenheten har status Efter annons.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">12</span> Kör Hangfire-jobb</summary>
+      <div class="body">Öppna Hangfire i ny flik och trigga jobbet UppdateraAnnonseringsperiodstatus.<br><strong>Förväntat:</strong> Jobbet körs.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">13</span> Tacka ja och rangordna</summary>
+      <div class="body">Gå till köärendefliken, tacka ja och rangordna lägenheterna för en spekulant.<br><strong>Förväntat:</strong> Ja-svar och rangordning registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">14</span> Ändra svarstid</summary>
+      <div class="body">Ändra svarstiden till ett passerat datum i Förbereda-fliken.<br><strong>Förväntat:</strong> Svarstiden har passerat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">15</span> Förmedla underlägenhet 0</summary>
+      <div class="body">Sök upp underlägenhet 0, förmedla den till en av spekulanterna och registrera svaret Avtal via spekulantfliken.<br><strong>Förväntat:</strong> Svaret Avtal är registrerat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">16</span> Förmedla underlägenhet 1</summary>
+      <div class="body">Förmedla underlägenhet 1 till en av spekulanterna, registrera svaret Ej godkänd och skicka nästa spekulant som hyresgästförslag.<br><strong>Förväntat:</strong> Svaret Ej godkänd är registrerat och nästa spekulant är föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">17</span> Förmedla underlägenhet 2</summary>
+      <div class="body">Förmedla underlägenhet 2 till en av spekulanterna, registrera svaret Avhopp och skicka nästa spekulant som hyresgästförslag.<br><strong>Förväntat:</strong> Svaret Avhopp är registrerat och nästa spekulant är föreslagen.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">18</span> Avregistrera typlägenheten</summary>
+      <div class="body">Gå till typlägenheten, öppna Uppgifter Registrera och avregistrera typlägenheten.<br><strong>Förväntat:</strong> Lägenheten har status Avslutat.</div>
+    </details>
+  </div>
+</details>
+
+<hr class="divider">
+
+<details class="testcase">
+  <summary><span class="tcid"># 20</span> Webben – registrera ny kund och betala med Swish eller faktura</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Kontrollera kunden i Bostoc</summary>
+      <div class="body">Öppna Bostoc i ny flik, kontrollera om kunden finns och stäng fliken.<br><strong>Förväntat:</strong> Det framgår om kunden finns.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Starta registreringen</summary>
+      <div class="body">Öppna webben (liten skärm), godkänn cookies, klicka på Registrera och välj Registrera dig som bostadssökande.<br><strong>Förväntat:</strong> Inloggningen visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Logga in</summary>
+      <div class="body">Logga in med testinloggningen.<br><strong>Förväntat:</strong> Registreringsformuläret visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Verifiera felmeddelanden</summary>
+      <div class="body">Verifiera felmeddelanden i registreringsformuläret.<br><strong>Förväntat:</strong> Felmeddelanden visas för obligatoriska fält.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Fyll i uppgifter</summary>
+      <div class="body">Fyll i uppgifterna, kontrollera om namn behöver fyllas i och bekräfta uppgifterna.<br><strong>Förväntat:</strong> Uppgifterna bekräftas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Gå till betalning</summary>
+      <div class="body">Verifiera felmeddelanden och gå till betalning.<br><strong>Förväntat:</strong> Betalningssidan visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Betala</summary>
+      <div class="body">Välj Swish i testmiljön och betalningsavi i Autotest-miljön och verifiera betalningen.<br><strong>Förväntat:</strong> Betalningen är verifierad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Kontrollera betalningsbekräftelse</summary>
+      <div class="body">Gå till Mina sidor.<br><strong>Förväntat:</strong> Betalningsbekräftelsen finns på Mina sidor.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 21</span> Webben – registrera ny kund och betala med kort</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Kontrollera kunden i Bostoc</summary>
+      <div class="body">Gå till Bostoc och kontrollera om kunden finns.<br><strong>Förväntat:</strong> Det framgår om kunden finns.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Starta registreringen</summary>
+      <div class="body">Öppna webben (liten skärm), godkänn cookies, klicka på Registrera, välj Registrera dig som bostadssökande och logga in med testinloggningen.<br><strong>Förväntat:</strong> Registreringsformuläret visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Verifiera felmeddelanden</summary>
+      <div class="body">Verifiera felmeddelanden i registreringsformuläret.<br><strong>Förväntat:</strong> Felmeddelanden visas för obligatoriska fält.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Fyll i uppgifter</summary>
+      <div class="body">Fyll i uppgifterna, kontrollera om namn behöver fyllas i och bekräfta uppgifterna.<br><strong>Förväntat:</strong> Uppgifterna bekräftas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Betala med kort</summary>
+      <div class="body">Verifiera felmeddelanden, gå till betalning och betala med kort direkt vid nyregistrering.<br><strong>Förväntat:</strong> Betalningen är verifierad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Kontrollera betalningsbekräftelse</summary>
+      <div class="body">Gå till Mina sidor.<br><strong>Förväntat:</strong> Betalningsbekräftelsen finns på Mina sidor.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 22</span> Webben – statistiksidan</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Öppna Statistik-sidan</summary>
+      <div class="body">Öppna webben (liten skärm) och godkänn cookies. Gå till Statistik-sidan.<br><strong>Förväntat:</strong> Statistiksidan visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Förmedlade lägenheter</summary>
+      <div class="body">Kontrollera totalt antal lägenheter som förmedlats senaste månaden.<br><strong>Förväntat:</strong> Antalet visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Tid till bostad</summary>
+      <div class="body">Kontrollera hur lång tid det tar att få en bostad.<br><strong>Förväntat:</strong> Statistiken visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Hyra och kötid per månad</summary>
+      <div class="body">Gå till Statistik-sidan och kontrollera hyra och kötid per månad.<br><strong>Förväntat:</strong> Statistiken visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Kötid</summary>
+      <div class="body">Kontrollera kötidsstatistiken.<br><strong>Förväntat:</strong> Statistiken visas.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 23</span> Webben – inloggning som sekretesskund</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Logga in som sekretesskund</summary>
+      <div class="body">Öppna webben (liten skärm) och godkänn cookies. Logga in på Mina sidor som sekretesskund.<br><strong>Förväntat:</strong> Inloggningen lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Kontrollera adress</summary>
+      <div class="body"><strong>Förväntat:</strong> Adressen visas inte under Mina uppgifter.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 24</span> Webben – intresseanmäl och avanmäl intresse</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Registrera köärende</summary>
+      <div class="body">I Bostoc: gå till köärendefliken, kontrollera om kunden finns, registrera ärende med personnummer, fyll i personuppgifter och spara.<br><strong>Förväntat:</strong> Köärendet sparas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Logga in på webben</summary>
+      <div class="body">Öppna webben (liten skärm) och godkänn cookies. Logga in på Mina sidor.<br><strong>Förväntat:</strong> Inloggningen lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Öppna Lediga bostäder</summary>
+      <div class="body">Öppna hamburgarmenyn och klicka på Lediga bostäder.<br><strong>Förväntat:</strong> Lediga bostäder visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Intresseanmäl</summary>
+      <div class="body"><strong>Förväntat:</strong> Intresseanmälan registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Avanmäl intresse</summary>
+      <div class="body">Avanmäl intresset på en ledig bostad.<br><strong>Förväntat:</strong> Intresset är avanmält.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 25</span> Webben – ändra mina uppgifter</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Logga in som kund</summary>
+      <div class="body">Öppna webben (liten skärm) och godkänn cookies. Logga in på Mina sidor med kundens personnummer.<br><strong>Förväntat:</strong> Inloggningen lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Ändra uppgifter</summary>
+      <div class="body">Ändra mina uppgifter på Mina sidor.<br><strong>Förväntat:</strong> Ändringarna sparas.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 26</span> Webben – acceptera medboende</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Logga in som kund</summary>
+      <div class="body">Öppna webben (liten skärm) och godkänn cookies. Logga in på Mina sidor med kundens personnummer.<br><strong>Förväntat:</strong> Inloggningen lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Lägg till medboende</summary>
+      <div class="body">Lägg till medboende med personnummer, öppna hamburgarmenyn och logga ut.<br><strong>Förväntat:</strong> Medboendeansökan skickas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Logga in som medboende</summary>
+      <div class="body">Logga in på Mina sidor med medboendets personnummer.<br><strong>Förväntat:</strong> Inloggningen lyckas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Acceptera medboendeansökan</summary>
+      <div class="body">Acceptera medboendeansökan från första kunden.<br><strong>Förväntat:</strong> Medboendeansökan är accepterad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Ta bort medboende</summary>
+      <div class="body">Ta bort medboendet kopplat till första kunden.<br><strong>Förväntat:</strong> Medboendet är borttaget.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 27</span> Webben – filtrera och sortera lediga bostäder (Autotest-miljö)</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Öppna lediga bostäder</summary>
+      <div class="body">Öppna webben (liten skärm) och godkänn cookies. Öppna hamburgarmenyn, klicka på Lediga bostäder och visa lista.<br><strong>Förväntat:</strong> Listan över lediga bostäder visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Sortera</summary>
+      <div class="body">Sortera på Anmälan senast, Hyra lägst först, Kommun A–Ö, Rum minst först och Yta minsta först.<br><strong>Förväntat:</strong> Listan sorteras enligt valt alternativ.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Filtrera på boendetyp och kö</summary>
+      <div class="body">Filtrera ett i taget och rensa filtren efter varje: Småhus/Radhus, Korttid, Ungdom, Bostad snabbt, Kompis ungdom, Senior, Familjelägenhet, Extern kö och Student.<br><strong>Förväntat:</strong> Listan filtreras och filtren kan rensas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Filtrera på hyra, rum, yta och nyproduktion</summary>
+      <div class="body">Filtrera på Hyra max, Rum min och max, Yta min och max samt Nyproduktion. Rensa filtren efter varje.<br><strong>Förväntat:</strong> Listan filtreras och filtren kan rensas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Filtrera på tillgänglighet</summary>
+      <div class="body">Filtrera på tillgänglig för nedsatt rörelseförmåga och nedsatt orienteringsförmåga.<br><strong>Förväntat:</strong> Listan filtreras.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 28</span> Webben – aktivera internkö (ignorerat)</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Avregistrera internkö i Bostoc</summary>
+      <div class="body">Gå till köärendefliken, sök internkön med personnummer och avregistrera internkö-kunden.<br><strong>Förväntat:</strong> Internkön är avregistrerad.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Öppna internkö på webben</summary>
+      <div class="body">Öppna webben (liten skärm) och godkänn cookies. Öppna hamburgarmenyn, gå till Så går det till och klicka på länken Interna bytesköer.<br><strong>Förväntat:</strong> Sidan för internkö visas.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Aktivera köplats</summary>
+      <div class="body">Klicka på Aktivera din köplats och aktivera internkön med personnummer och avtalsnummer.<br><strong>Förväntat:</strong> Internkön är aktiverad.</div>
+    </details>
+  </div>
+</details>
+
+<details class="testcase">
+  <summary><span class="tcid"># 29</span> Webben – rangordna nyproduktionslägenheter (ignorerat)</summary>
+  <div class="steps">
+    <div class="toolbar"><button type="button" class="expand-all">Fäll ut alla steg</button></div>
+    <details class="step">
+      <summary><span class="num">1</span> Intresseanmäl kund 1</summary>
+      <div class="body">Öppna webben (liten skärm) och godkänn cookies. Logga in som kund 1, öppna Lediga bostäder, visa lista, välj Visa endast bostäder som jag kan söka, filtrera på Nyproduktion, intresseanmäl på typlägenheten och logga ut.<br><strong>Förväntat:</strong> Intresseanmälan registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">2</span> Intresseanmäl kund 2</summary>
+      <div class="body">Logga in som kund 2, intresseanmäl på typlägenheten på samma sätt och logga ut.<br><strong>Förväntat:</strong> Intresseanmälan registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">3</span> Skapa visningsomgång i Bostoc</summary>
+      <div class="body">Sök upp typlägenheten, öppna Förbereda-fliken, skapa visningsomgång och avbryt annonseringen.<br><strong>Förväntat:</strong> Lägenheten har status Efter annons.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">4</span> Kör Hangfire-jobb och kalla till visning</summary>
+      <div class="body">Öppna Hangfire och trigga jobbet UppdateraAnnonseringsperiodstatus. Kalla sökanden till visning.<br><strong>Förväntat:</strong> Sökandena är kallade till visning.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">5</span> Svar och rangordning, kund 1</summary>
+      <div class="body">Logga in som kund 1, lämna ja-svar via webben, rangordna underlägenheterna 1 och 2 och logga ut.<br><strong>Förväntat:</strong> Svar och rangordning registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">6</span> Svar och rangordning, kund 2</summary>
+      <div class="body">Logga in som kund 2, lämna ja-svar via webben, rangordna underlägenheterna 2 och 1 och logga ut.<br><strong>Förväntat:</strong> Svar och rangordning registreras.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">7</span> Ändra svarstid</summary>
+      <div class="body">I Bostoc: sök upp typlägenheten, spara diarienumret och ändra svarstiden till ett passerat datum.<br><strong>Förväntat:</strong> Svarstiden har passerat.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">8</span> Förmedla underlägenheter</summary>
+      <div class="body">Förmedla båda underlägenheterna (via diarienummer) till spekulanterna och registrera svaret Avtal för var och en via spekulantfliken.<br><strong>Förväntat:</strong> Svaret Avtal är registrerat för båda.</div>
+    </details>
+    <details class="step">
+      <summary><span class="num">9</span> Avregistrera typlägenheten</summary>
+      <div class="body">Sök upp typlägenheten, öppna Uppgifter Registrera och avregistrera den.<br><strong>Förväntat:</strong> Lägenheten har status Avslutat.</div>
+    </details>
+  </div>
+</details>
+
+<script>
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest('.expand-all');
+  if (!btn) return;
+  var steps = btn.closest('.testcase').querySelectorAll('.step');
+  var open = Array.prototype.some.call(steps, function (d) { return !d.open; });
+  steps.forEach(function (d) { d.open = open; });
+  btn.textContent = open ? 'Fäll in alla steg' : 'Fäll ut alla steg';
+});
+document.addEventListener('toggle', function (e) {
+  var d = e.target;
+  if (!d.classList || !d.classList.contains('step')) return;
+  var tc = d.closest('.testcase');
+  var all = Array.prototype.every.call(tc.querySelectorAll('.step'), function (x) { return x.open; });
+  tc.querySelector('.expand-all').textContent = all ? 'Fäll in alla steg' : 'Fäll ut alla steg';
+}, true);
+
+</script>
+</body>
+</html>

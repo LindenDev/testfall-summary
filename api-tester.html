@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API-tester</title>
+<style>
+  :root {
+    --bg: #f2f2f2;
+    --surface: #ffffff;
+    --text: #111111;
+    --muted: #595959;
+    --line: #d0d0d0;
+    --accent: #000000;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121212;
+      --surface: #1c1c1c;
+      --text: #f0f0f0;
+      --muted: #a3a3a3;
+      --line: #3a3a3a;
+      --accent: #ffffff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+  }
+  .back, h1, .group { max-width: 720px; margin-left: auto; margin-right: auto; }
+  .back {
+    display: block;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: .9375rem;
+  }
+  .back:hover { text-decoration: underline; }
+  .back:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  h1 { font-size: 1.75rem; line-height: 1.25; margin-top: 0; margin-bottom: 1.5rem; }
+  .group {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  .group h2 {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    font-size: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .group ul { list-style: none; margin: 0; padding: 0; }
+  .group li { padding: .625rem 1.25rem; border-bottom: 1px solid var(--line); }
+  .group li:last-child { border-bottom: 0; }
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">← Tillbaka</a>
+
+<h1>API-tester</h1>
+
+<section class="group">
+  <h2>Bostäder</h2>
+  <ul>
+    <li>Bostäder egenskaper OK</li>
+    <li>Bostäder OK</li>
+    <li>Bostäder uppdatera uppgifter allt OK</li>
+    <li>Bostäder uppdatera uppgifter OK</li>
+    <li>Get bostad diarium</li>
+    <li>Get bostad diarium med innehåll</li>
+    <li>Get bostad diarium med innehåll komplement</li>
+    <li>Get bostad diarium med innehåll variant</li>
+    <li>Hämta bostad OK</li>
+    <li>Hämta bostäder egenskaper OK</li>
+    <li>Registrera bostad</li>
+  </ul>
+</section>
+
+<section class="group">
+  <h2>Bostadssökande</h2>
+  <ul>
+    <li>Bostadssökande hämta</li>
+    <li>Bostadssökande sök allt</li>
+    <li>Bostadssökande sök på namn</li>
+    <li>Bostadssökande id: hämta</li>
+    <li>Bostadssökande id: ärenden</li>
+    <li>Hämta betalningar för bostadssökande</li>
+    <li>Hämta nyreggad bostadssökande</li>
+    <li>Köärende aktuella intressanmälningar</li>
+    <li>Registrera bostadssökande</li>
+  </ul>
+</section>
+
+<section class="group">
+  <h2>Behörighet API-tester</h2>
+  <ul>
+    <li>Testa mina behörigheter</li>
+    <li>Testa mina behörigheter med DTO</li>
+  </ul>
+</section>
+
+</body>
+</html>

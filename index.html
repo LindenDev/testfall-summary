@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automatiserade testfall</title>
+<style>
+  :root {
+    --bg: #f2f2f2;
+    --surface: #ffffff;
+    --text: #111111;
+    --muted: #595959;
+    --line: #d0d0d0;
+    --accent: #000000;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121212;
+      --surface: #1c1c1c;
+      --text: #f0f0f0;
+      --muted: #a3a3a3;
+      --line: #3a3a3a;
+      --accent: #ffffff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+  }
+  main { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 1.75rem; line-height: 1.25; margin: 0 0 .5rem; }
+  .lead { color: var(--muted); margin: 0 0 1.5rem; }
+  .sections { display: grid; gap: 1rem; }
+  .section {
+    display: block;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .section h2 { margin: 0 0 .25rem; font-size: 1.25rem; }
+  .section p { margin: 0; color: var(--muted); }
+  a.section:hover { border-color: var(--accent); }
+  a.section:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .section.empty { opacity: .6; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Automatiserade testfall</h1>
+  <p class="lead">Välj kategori.</p>
+
+  <div class="sections">
+    <a class="section" href="api-tester.html">
+      <h2>API-tester</h2>
+      <p>22 API-tester för bostäder, bostadssökande och behörigheter.</p>
+    </a>
+
+    <a class="section" href="bostoc-plus-tester.html">
+      <h2>Bostoc Plus-tester</h2>
+      <p>2 testfall: registrera bostad och sök bostad.</p>
+    </a>
+
+    <a class="section" href="testfall_forMedla_lagenhet_FoT.html">
+      <h2>Bostoc, FÄP och Webben-tester</h2>
+      <p>29 testfall för förmedling, Micasa, typlägenheter och webben.</p>
+    </a>
+  </div>
+</main>
+</body>
+</html>
